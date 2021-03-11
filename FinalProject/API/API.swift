@@ -11,7 +11,7 @@ import Foundation
 struct API {
     static func getArticles(page: Int, city: String, state: String, completion: @escaping ([Article]?) -> ()) {
         let apiKey = "070f3b14a49b49ef9180cca7df16c06c"
-        let urlString = "https://newsapi.org/v2/everything?q=\(city)%20\(state)%20climate&sortBy=popularity&pageSize=10&page\(page)"
+        let urlString = "https://newsapi.org/v2/everything?q=\(city)%20nature&sortBy=popularity&pageSize=10&page\(page)"
         
         guard let url = URL(string: urlString) else {return}
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)

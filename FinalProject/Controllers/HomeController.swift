@@ -16,6 +16,7 @@ class HomeController: UIViewController {
     var submitButton: UIButton!
     var autoButton: UIButton!
     var titleLabel: UILabel!
+    var imageView: UIImageView!
     
     override func loadView() {
         let view = UIView()
@@ -30,6 +31,7 @@ class HomeController: UIViewController {
         submitButton.translatesAutoresizingMaskIntoConstraints = false
         submitButton.backgroundColor = .green
         submitButton.layer.cornerRadius = 10
+        submitButton.setTitleColor(.black, for: .normal)
         submitButton.setTitle("Explore", for: .normal)
         view.addSubview(submitButton)
         
@@ -37,14 +39,20 @@ class HomeController: UIViewController {
         autoButton.translatesAutoresizingMaskIntoConstraints = false
         autoButton.backgroundColor = .green
         autoButton.layer.cornerRadius = 10
+        autoButton.setTitleColor(.black, for: .normal)
         autoButton.setTitle("Get Current Zipcode", for: .normal)
         view.addSubview(autoButton)
         
         titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
         titleLabel.text = "ClimateNews"
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
+        
+        imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(imageView)
         
         NSLayoutConstraint.activate([
             searchBar.centerYAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor),
@@ -61,7 +69,11 @@ class HomeController: UIViewController {
             autoButton.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 20),
             autoButton.widthAnchor.constraint(equalTo: submitButton.widthAnchor, constant: 50),
             autoButton.heightAnchor.constraint(equalTo: submitButton.heightAnchor),
-            autoButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor)
+            autoButton.centerXAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            imageView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
+            imageView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10),
+            imageView.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -20)
         ])
         
         self.view = view
@@ -70,6 +82,8 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let defaults = UserDefaults.standard
+        
+        imageView.image = UIImage(named: "tree")
         
         if let zipcode = defaults.string(forKey: "zipcode") {
             transitionView(zipcode: zipcode)
